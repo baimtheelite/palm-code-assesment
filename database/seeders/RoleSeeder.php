@@ -17,7 +17,7 @@ class RoleSeeder extends Seeder
         DB::table('roles')->insert([
             [
                 'id' => \Str::uuid(),
-                'name' => 'Admin',
+                'name' => 'Super Admin',
                 'guard_name' => 'web',
                 'created_at' => now(),
                 'updated_at' => now(),

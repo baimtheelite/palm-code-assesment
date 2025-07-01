@@ -10,6 +10,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\SpatieLaravelTranslatablePlugin;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -43,6 +44,14 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->plugin(\TomatoPHP\FilamentMediaManager\FilamentMediaManagerPlugin::make())
             ->plugin(    FilamentShieldPlugin::make())
+            ->plugin(
+                SpatieLaravelTranslatablePlugin::make()
+                            ->defaultLocales([
+                                'en',
+                                'de',
+                                'id',
+                            ])
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

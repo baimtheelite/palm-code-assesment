@@ -20,19 +20,27 @@ class PageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('pages');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label(__('title'))
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->required(),
                 Forms\Components\RichEditor::make('body')
+                    ->label(__('body'))
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\Select::make('status')
+                    ->label(__('status'))
                     ->options([
                         'draft'     => 'Draft',
                         'published' => 'Published'
@@ -50,10 +58,12 @@ class PageResource extends Resource
                 //     ->label('ID')
                 //     ->searchable(),
                 Tables\Columns\TextColumn::make('title')
+                    ->label(__('title'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label(__('status'))
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'draft' => 'gray',
@@ -61,14 +71,17 @@ class PageResource extends Resource
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

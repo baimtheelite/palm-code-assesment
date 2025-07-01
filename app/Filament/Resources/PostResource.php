@@ -22,42 +22,57 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('posts');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label(__('title'))
                     ->live(onBlur: true)
                     ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', \Str::slug($state))),
                 Forms\Components\TextInput::make('slug')
                     ->required(),
                 Forms\Components\Textarea::make('excerpt')
+                    ->label(__('excerpt'))
                     ->columnSpanFull(),
                 Forms\Components\RichEditor::make('content')
+                    ->label(__('content'))
                     ->required()
                     ->columnSpanFull(),
                 // Forms\Components\FileUpload::make('image')
                 //     ->image()
                 //     ->directory('posts'),
                 MediaManagerInput::make('image')
+                ->label(__('image'))
                 ->disk('public')
                 ->schema([
                     // Forms\Components\TextInput::make('title')
                     //     ->required()
                     //     ->maxLength(255),
                     Forms\Components\TextInput::make('description')
+                        ->label(__('description'))
                         // ->required()
                         ->maxLength(255),
                 ]),
                 Forms\Components\Select::make('status')
+                    ->label(__('status'))
                     ->options([
                         'draft'     => 'Draft',
                         'published' => 'Published'
                     ])
                     ->default('draft')
                     ->required(),
-                Forms\Components\DateTimePicker::make('published_at'),
+                Forms\Components\DateTimePicker::make('published_at')
+                    ->label(__('published_at'))
+                    ->default(now())
+                    ->required(),
                 Forms\Components\Select::make('categories')
+                    ->label(__('categories'))
                     ->relationship('categories', 'name')
                     ->preload()
                     ->multiple(),
@@ -69,8 +84,10 @@ class PostResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label(__('title'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label(__('status'))
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'draft' => 'gray',
@@ -78,17 +95,21 @@ class PostResource extends Resource
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('published_at')
+                    ->label(__('published_at'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

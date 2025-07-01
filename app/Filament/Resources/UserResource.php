@@ -22,16 +22,26 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'User Management';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('users');
+    }
+
+    
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('name'))
                     ->required(),
                 Forms\Components\TextInput::make('email')
+                    ->label(__('email'))
                     ->email()
                     ->required(),
                 Select::make('roles')
+                    ->label(__('roles'))
                     ->preload()
                     ->multiple()
                     ->relationship('roles', 'name'),
@@ -47,17 +57,22 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->label(__('email'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
+                    ->label(__('email_verified_at'))
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

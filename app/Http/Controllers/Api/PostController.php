@@ -28,7 +28,11 @@ class PostController extends Controller
         $post = $this->postRepository->show($id);
         
         if (!$post) {
-            return response()->json(['message' => 'Post not found'], 404);
+            return ResponseFormatter::error(
+                null,
+                'Post not found',
+                404
+            );
         }
 
         return  ResponseFormatter::success(PostResource::make($post), 'Post retrieved successfully');

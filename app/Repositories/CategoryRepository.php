@@ -27,10 +27,6 @@ class CategoryRepository
     {
         $category = $this->baseQuery()->where('id', $id)->orWhere('slug', $id)->first();
 
-        if (!$category) {
-            return ResponseFormatter::error(null, 'Category not found', 404);
-        }
-
         return $category;
     }
 }

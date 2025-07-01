@@ -26,10 +26,6 @@ class PageRepository
     {
         $page = $this->baseQuery()->where('id', $id)->orWhere('slug', $id)->first();
 
-        if (!$page) {
-            return ResponseFormatter::error(null, 'Page not found', 404);
-        }
-
         return $page;
     }
 }

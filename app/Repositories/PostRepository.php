@@ -29,10 +29,6 @@ class PostRepository
     {
         $post = $this->baseQuery()->where('id', $id)->orWhere('slug', $id)->first();
 
-        if (!$post) {
-            return ResponseFormatter::error(null, 'Post not found', 404);
-        }
-
         return $post;
     }
 }

@@ -16,26 +16,19 @@ class RoleSeeder extends Seeder
 
         DB::table('roles')->insert([
             [
-                'id' => \Str::uuid(),
-                'name' => 'Super Admin',
+                // 'id' => \Str::uuid(),
+                'name' => 'super_admin',
                 'guard_name' => 'web',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'id' => \Str::uuid(),
-                'name' => 'Editor',
+                // 'id' => \Str::uuid(),
+                'name' => 'writer',
                 'guard_name' => 'web',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'id' => \Str::uuid(),
-                'name' => 'Viewer',
-                'guard_name' => 'web',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            ]
         ]);
     }
 }

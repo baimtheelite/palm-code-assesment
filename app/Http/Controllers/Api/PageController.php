@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Pagination;
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PageResource;
 use App\Models\Page;
@@ -17,14 +19,29 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $pages = $this->pageRepository->index($request);
-     
-        return response()->json(PageResource::collection($pages));
+        
+        return ResponseFormatter::success(
+            PageResource::collection($pages),
+            'Pages retrieved successfully',
+            Pagination::getPagination($pages)
+        );
     }
 
     public function show(string $id)
     {
         $page = $this->pageRepository->show($id);
 
-        return response()->json(new PageResource($page));
+        if (!$page) {
+            return ResponseFormatter::error(
+                null,
+                'Page not found',
+                404
+            );
+        }
+
+        return ResponseFormatter::success(
+            PageResource::make($page),
+            'Page retrieved successfully'
+        );
     }
 }

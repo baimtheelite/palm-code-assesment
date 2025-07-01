@@ -18,6 +18,14 @@ class ShieldSeeder extends Seeder
         static::makeRolesWithPermissions($rolesWithPermissions);
         static::makeDirectPermissions($directPermissions);
 
+        //get all permissions sync with super_admin role
+        $superAdminRole = Utils::getRoleModel()::whereName('super_admin')->first();
+        if ($superAdminRole) {
+            $permissionModel = Utils::getPermissionModel();
+            $permissions = $permissionModel::all();
+            $superAdminRole->syncPermissions($permissions);
+        }
+
         $this->command->info('Shield Seeding Completed.');
     }
 

@@ -16,8 +16,17 @@ class UserSeeder extends Seeder
         DB::table('users')->delete(); // Clear existing users
 
         $user = User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Super Admin',
+            'email' => 'super_admin@example.com',
         ]);
+        
+        $user->assignRole('super_admin');
+        
+        $user = User::factory()->create([
+            'name' => 'writer',
+            'email' => 'writer@example.com',
+        ]);
+
+        $user->assignRole('writer');
     }
 }

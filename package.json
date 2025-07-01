@@ -4,8 +4,8 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "docker:start": "cd laradock && docker compose up -d nginx",
-        "docker:workspace": "cd laradock && docker compose exec --user=laradock workspace bash"
+        "docker:start": "cd laradock-palm-code-admin && docker compose up -d nginx",
+        "docker:workspace": "cd laradock-palm-code-admin && docker compose exec --user=laradock workspace bash"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.0.7",

@@ -5,7 +5,8 @@
         "build": "vite build",
         "dev": "vite",
         "docker:start": "cd laradock-palm-code-admin && docker compose up -d nginx",
-        "docker:workspace": "cd laradock-palm-code-admin && docker compose exec --user=laradock workspace bash"
+        "docker:workspace": "cd laradock-palm-code-admin && docker compose exec --user=laradock workspace bash",
+        "docker:stop": "cd laradock-palm-code-admin && docker compose stop"
     },
     "dependencies": {
         "@tailwindcss/vite": "^4.0.7",
